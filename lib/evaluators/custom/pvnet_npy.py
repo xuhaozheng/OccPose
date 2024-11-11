@@ -22,12 +22,8 @@ class Evaluator:
         self.coco = coco.COCO(self.ann_file)
 
         data_root = args['data_root']
-        # model_path = 'data/custom/model.ply'
-        # self.model = pvnet_data_utils.get_ply_model(model_path)
-        # model_path = 'data/custom/convert_Tube45mm_77mm.npy'
-        model_path = 'data/custom/convert_Tube45mm_53mm.npy'
+        model_path = 'data/custom_LND/LND_cut_notip_short.npy'
         self.model = np.load(model_path)
-        # self.diameter = np.loadtxt('data/custom/diameter.txt').item()
         self.diameter = np.array([44])
 
         self.proj2d = []

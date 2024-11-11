@@ -53,9 +53,8 @@ class Evaluator:
         self.coco = coco.COCO(self.ann_file)
 
         data_root = args['data_root']
-        model_path = 'data/custom_PG/PG_cut_notip.npy'
+        model_path = 'data/custom_LND/LND_cut_notip_short.npy'
         self.model = np.load(model_path)
-        # self.diameter = np.loadtxt('data/custom/diameter.txt').item()
         self.diameter = np.array([54])
         self.icp_render = icp_utils.SynRenderer(cfg.cls_type) if cfg.test.icp else None
 

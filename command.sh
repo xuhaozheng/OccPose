@@ -19,10 +19,16 @@ python run.py --type vis_refinement
 
 '''
 3090 Env configuration
-conda create -n test
-conda install pytorch==1.10.1 torchvision==0.11.2 torchaudio==0.10.1 cudatoolkit=11.3 -c pytorch -c conda-forge
+conda create -n OccPose python=3.9 -y
+conda activate OccPose
+conda install pytorch==1.10.1 torchvision==0.11.2 torchaudio==0.10.1 cudatoolkit=11.3 -c pytorch -c conda-forge -y
 pip install yacs
 pip install opencv-python
 pip install pycocotools
 pip install tensorboardX
+conda install mkl==2024.0 -y
+pip install tqdm
+pip install plyfile
+pip install scipy
+pip install imgaug
 '''

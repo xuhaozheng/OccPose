@@ -50,20 +50,11 @@ class Evaluator:
         self.result_dir = result_dir
         args = DatasetCatalog.get(cfg.test.dataset)
         self.ann_file = args['ann_file']
-        # self.ann_file = 'data/custom_PG/all.json'
-        # self.ann_file = 'data/custom/all_ABC.json'
-        # self.ann_file ='data/custom_PG/all_test.json'
-        print("!!!evalutor ann file", self.ann_file)
         self.coco = coco.COCO(self.ann_file)
 
         data_root = args['data_root']
-        # model_path = 'data/custom/model.ply'
-        # self.model = pvnet_data_utils.get_ply_model(model_path)
-        # model_path = 'data/custom/convert_Tube45mm_53mm.npy'
-        model_path = 'data/custom_LND/LND_cut_notip.npy'
-        # model_path = 'data/custom_PG/PG_cut_notip.npy'
+        model_path = 'data/custom_LND/LND_cut_notip_short.npy'
         self.model = np.load(model_path)
-        # self.diameter = np.loadtxt('data/custom/diameter.txt').item()
         self.diameter = np.array([54])
         self.icp_render = icp_utils.SynRenderer(cfg.cls_type) if cfg.test.icp else None
 

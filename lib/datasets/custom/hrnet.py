@@ -19,11 +19,8 @@ class Dataset(data.Dataset):
 
         self.data_root = data_root
         self.split = split
-        # print("annotaion file:",ann_file)
         self.coco = COCO(ann_file)
         self.img_ids = np.array(sorted(self.coco.getImgIds()))
-        print("num of images",self.img_ids.shape)
-        # input()
         self._transforms = transforms
         self.cfg = cfg
 
@@ -34,14 +31,12 @@ class Dataset(data.Dataset):
         path = self.coco.loadImgs(int(img_id))[0]['file_name']
         inp = Image.open(path)
         kpt_2d = np.concatenate([anno['fps_2d'], anno['center_2d']], axis=0)    ###original code, add center point
-        # kpt_2d = np.array(anno['fps_2d'])    ###original code, add center point
 
         cls_idx = linemod_config.linemod_cls_names.index(anno['cls']) + 1
         mask = pvnet_data_utils.read_linemod_mask(anno['mask_path'], anno['type'], cls_idx)
         
         if self.split=='test':
             gt_pose = np.array(anno['pose'])
-            # print("gt_pose",gt_pose.shape)
             return inp, kpt_2d, mask, path, gt_pose
 
         return inp, kpt_2d, mask, path, None
@@ -51,8 +46,6 @@ class Dataset(data.Dataset):
         img_id = self.img_ids[index]
 
         img, kpt_2d, mask, path, gt_pose = self.read_data(img_id)
-        # print('img',img.shape,'kpt_2d',kpt_2d.shape,'mask',mask.shape)
-        ### cancel augmentation firstly!!
         
         ### convert PIL image to numpy array
         inp = np.asarray(img).astype(np.uint8)
