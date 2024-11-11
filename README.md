@@ -34,10 +34,13 @@ This is the official implementation of "Occlusion-Robust Markerless Surgical Ins
     cd ../dcn_v2
     python setup.py build_ext --inplace
     ```
+3. Put the dataset in dataset folder
 
 ## Testing
+    ```
 python run.py --type evaluate --cfg_file configs/hrnet.yaml or
 python run.py --type evaluate --cfg_file configs/custom.yaml
+    ```
 
 ## Training
 
