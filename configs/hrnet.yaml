@@ -1,0 +1,82 @@
+model: 'occpose'
+model_dir: 'data/model'
+network: 'res'
+heads: ''
+task: 'hrnet'
+gpus: (0, 1, 2, 3)
+resume: true
+
+train:
+    optim: 'adam'
+    lr: 1e-3
+    epoch: 240
+    milestones: (20, 40, 60, 80, 100, 120, 160, 180, 200, 220)
+    gamma: 0.5
+    batch_size: 32
+    dataset: 'CustomTrain'
+    cropresize_rate: 1.0
+    rotate_rate: 1.0
+    rotate_min: -30
+    rotate_max: 30
+    weight_decay: 0.
+    batch_sampler: 'image_size'
+test:
+    dataset: 'CustomTest'
+    batch_size: 1
+    batch_sampler: 'image_size'
+    dataset_all: 'CustomAll'
+    # epoch: 
+MODEL:
+  NAME: seg_hrnet
+  ALIGN_CORNERS: False
+  PRETRAINED: './pretrained_models/hrnetv2_w48_imagenet_pretrained.pth'
+  EXTRA:
+    FINAL_CONV_KERNEL: 1
+    STAGE1:
+      NUM_MODULES: 1
+      NUM_RANCHES: 1
+      BLOCK: BOTTLENECK
+      NUM_BLOCKS:
+      - 4
+      NUM_CHANNELS:
+      - 64
+      FUSE_METHOD: SUM
+    STAGE2:
+      NUM_MODULES: 1
+      NUM_BRANCHES: 2
+      BLOCK: BASIC
+      NUM_BLOCKS:
+      - 4
+      - 4
+      NUM_CHANNELS:
+      - 48
+      - 96
+      FUSE_METHOD: SUM
+    STAGE3:
+      NUM_MODULES: 4
+      NUM_BRANCHES: 3
+      BLOCK: BASIC
+      NUM_BLOCKS:
+      - 4
+      - 4
+      - 4
+      NUM_CHANNELS:
+      - 48
+      - 96
+      - 192
+      FUSE_METHOD: SUM
+    STAGE4:
+      NUM_MODULES: 3
+      NUM_BRANCHES: 4
+      BLOCK: BASIC
+      NUM_BLOCKS:
+      - 4
+      - 4
+      - 4
+      - 4
+      NUM_CHANNELS:
+      - 48
+      - 96
+      - 192
+      - 384
+      FUSE_METHOD: SUM
