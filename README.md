@@ -12,12 +12,17 @@ This is the official implementation of "Occlusion-Robust Markerless Surgical Ins
     pip install opencv-python
     pip install pycocotools
     pip install tensorboardX
+    conda install mkl==2024.0 -y
+    pip install tqdm
+    pip install plyfile
+    pip install scipy
+    pip install imgaug
     ```
 2. Compile cuda extensions under `lib/csrc`:
     ```
     ROOT=/path/to/clean-pvnet
     cd $ROOT/lib/csrc
-    export CUDA_HOME="/usr/local/cuda-9.0"
+    export CUDA_HOME="/usr/local/cuda-11.3"
     cd ransac_voting
     python setup.py build_ext --inplace
     cd ../nn
