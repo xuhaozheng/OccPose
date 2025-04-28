@@ -38,16 +38,16 @@ This is the official implementation of "Occlusion-Robust Markerless Surgical Ins
 
 ## Testing
 
-    ```
-python run.py --type evaluate --cfg_file configs/hrnet.yaml or
-python run.py --type evaluate --cfg_file configs/custom.yaml
-    ```
+### Testing on Linemod
+
+    python run.py --type evaluate --cfg_file configs/hrnet.yaml or
+    python run.py --type evaluate --cfg_file configs/custom.yaml
+
 
 ## Training
 
 ### Training on Linemod
 
-    ```
+
     python train_net.py --cfg_file configs/hrnet.yaml train.batch_size 2 or
     python train_net.py --cfg_file configs/custom.yaml train.batch_size 4
-    ```
